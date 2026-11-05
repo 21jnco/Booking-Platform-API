@@ -10,20 +10,18 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 class User(Base):
     __tablename__="users"
 
-    id: Mapped[str] = mapped_column(
+    id: Mapped[int] = mapped_column(
         Integer,
         primary_key=True,
     )
 
     first_name: Mapped[str] = mapped_column(
-        String(25),
-        index=True,
+        String(50),
         nullable=False
     )
 
-    second_name: Mapped[str] = mapped_column(
-        String(25),
-        index=True,
+    last_name: Mapped[str] = mapped_column(
+        String(50),
         nullable=False
     )
 
@@ -52,7 +50,7 @@ class User(Base):
         nullable=False
     )
 
-    deleted_at: Mapped[datetime] = mapped_column(
+    deleted_at: Mapped[datetime | None] = mapped_column(
         DateTime,
         default=None,
         nullable=True

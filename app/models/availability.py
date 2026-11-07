@@ -6,6 +6,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime, timezone
 
 class Availability(Base):
+    """Provider's working interval within which appointments can be booked."""
+
     __tablename__="availabilities"
 
     __table_args__=(
@@ -26,12 +28,12 @@ class Availability(Base):
     )
 
     starts_at: Mapped[datetime] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         nullable=False
     )
     
     ends_at: Mapped[datetime] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         nullable=False
     )
     

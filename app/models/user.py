@@ -38,20 +38,20 @@ class User(Base):
     )
 
     created_at: Mapped[datetime] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
         nullable=False
     )
 
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
         onupdate= lambda: datetime.now(timezone.utc),
         nullable=False
     )
 
     deleted_at: Mapped[datetime | None] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         default=None,
         nullable=True
     )
@@ -59,5 +59,11 @@ class User(Base):
     bookings = relationship(
         "Booking",
         back_populates="user"
+    )
+
+    provider = relationship(
+        "Provider",
+        back_populates="user",
+        uselist=False
     )
     

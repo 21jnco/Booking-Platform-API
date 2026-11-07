@@ -9,6 +9,8 @@ from sqlalchemy import CheckConstraint
 from app.enums.booking import BookingStatus
 
 class Booking(Base):
+    """User's reservation for a service with a scheduled interval and status."""
+
     __tablename__="bookings"
 
     __table_args__=(
@@ -39,17 +41,17 @@ class Booking(Base):
             name="booking_status",
             values_callable=lambda items: [item.value for item in items],
         ),
-        default=BookingStatus.COMPLETED,
+        default=BookingStatus.CONFIRMED,
         nullable=False
     )
 
     starts_at: Mapped[datetime] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         nullable=False
     )
 
     ends_at: Mapped[datetime] = mapped_column(
-        DateTime,
+        DateTime(timezone=True),
         nullable=False
     )
 

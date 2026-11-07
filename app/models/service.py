@@ -7,6 +7,8 @@ from sqlalchemy import Integer, String, DateTime, ForeignKey, TEXT, DECIMAL, Boo
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 
 class Service(Base):
+    """Service offered by a provider with a specified price and duration."""
+
     __tablename__="services"
 
     __table_args__=(

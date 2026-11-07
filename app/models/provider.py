@@ -8,6 +8,8 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime, timezone
 
 class Provider(Base):
+    """Specialist profile linked to a user, with services and availability intervals."""
+
     __tablename__="providers"
 
     id: Mapped[int] = mapped_column(

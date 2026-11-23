@@ -12,8 +12,10 @@ class BookingCreate(BaseModel):
         if value.tzinfo is None or value.utcoffset() is None:
             raise ValueError("A time zone is required")
         value = value.astimezone(UTC)
-        if value.minute or value.second or value.microsecond:
-            raise ValueError("Slots must start on a whole UTC hour")
+        if value.second or value.microsecond:
+            raise ValueError("Seconds and microseconds must be zero")
+        if value.minute % 5 != 0:
+            raise ValueError("Booking must start at a 5-minute boundary")
         return value
 
 
@@ -27,8 +29,10 @@ class BookingUpdate(BaseModel):
         if value.tzinfo is None or value.utcoffset() is None:
             raise ValueError("A time zone is required")
         value = value.astimezone(UTC)
-        if value.minute or value.second or value.microsecond:
-            raise ValueError("Slots must start on a whole UTC hour")
+        if value.second or value.microsecond:
+            raise ValueError("Seconds and microseconds must be zero")
+        if value.minute % 5 != 0:
+            raise ValueError("Booking must start at a 5-minute boundary")
         return value
 
 

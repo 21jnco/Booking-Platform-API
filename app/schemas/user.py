@@ -35,6 +35,15 @@ class FirstNameUpdate(BaseModel):
 class LastNameUpdate(BaseModel):
     new_last_name: str = Field(max_digits=50)
 
+class UserRecovery(BaseModel):
+    email: EmailStr = Field(max_length=255)
+    password: str = Field(min_length=8, max_length=255)
+
+    @field_validator("new_email")
+    @classmethod
+    def normalize_email(cls, value: EmailStr) -> EmailStr:
+        return value.lower()
+
 
 class UserResponse(BaseModel):
     first_name: str = Field(max_length=50)

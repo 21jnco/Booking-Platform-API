@@ -1,13 +1,19 @@
 from sqlalchemy.exc import IntegrityError
 
 class AlreadyExistsError(Exception):
-    pass
+    def __init__(self, status_code: int, detail: str):
+        self.status_code = status_code
+        self.detail = detail
 
 class NonexistingError(Exception):
-    pass
+    def __init__(self, status_code: int, detail: str):
+        self.status_code = status_code
+        self.detail = detail
 
-class IncorrectPassword(Exception):
-    pass
+class IncorrectData(Exception):
+    def __init__(self, status_code: int, detail: str):
+        self.status_code = status_code
+        self.detail = detail
 
 def violates_unique(error: IntegrityError, constraint: str):
     original = error.orig
